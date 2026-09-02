@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<Integer>> shiftGrid(int[][] grid, int k) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        // Initialize result
+        for (int i = 0; i < m; i++) {
+            result.add(new ArrayList<>());
+            for (int j = 0; j < n; j++) {
+                result.get(i).add(0);
+            }
+        }
+
+        // Move each element
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                int index = i * n + j;
+                int newIndex = (index + k) % (m * n);
+
+                int newRow = newIndex / n;
+                int newCol = newIndex % n;
+
+                result.get(newRow).set(newCol, grid[i][j]);
+            }
+        }
+
+        return result;
+    }
+}
